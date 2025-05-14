@@ -3,6 +3,8 @@ package com.example.klimaklog.quiz
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,8 +16,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.klimaklog.ui.theme.klimaFont
 import com.example.klimaklog.viewmodel.QuizViewModel
-
-
 
 @Composable
 fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
@@ -32,40 +32,79 @@ fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewM
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Let Quiz", fontSize = 28.sp, fontFamily = klimaFont)
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        if (question == null) {
-            Text("Indlæser spørgsmål...", fontFamily = klimaFont)
-            return
-        }
-
-        Text(text = question!!.text, fontSize = 20.sp, fontFamily = klimaFont)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        question!!.options.forEach { option ->
-            Button(
-                onClick = { viewModel.submitAnswer(option) },
-                modifier = Modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(option)
+        // 🔙 Tilbageknap
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Tilbage"
+                )
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        userAnswer?.let {
-            val correct = viewModel.checkAnswerIsCorrect()
+        // 🧠 Titel
+        Text(
+            text = "Let Quiz",
+            fontFamily = klimaFont,
+            fontSize = 32.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // ⏳ Indlæser
+        if (question == null) {
+            CircularProgressIndicator()
+            return
+        }
+
+        // ❓ Spørgsmål
+        Box(
+            modifier = Modifier
+                .background(Color(0xFFDFFFD9), RoundedCornerShape(24.dp))
+                .padding(16.dp)
+        ) {
             Text(
-                text = if (correct) "Korrekt!" else "Forkert",
-                color = if (correct) Color.Green else Color.Red,
-                fontSize = 18.sp,
-                fontFamily = klimaFont
+                text = question!!.text,
+                fontFamily = klimaFont,
+                fontSize = 16.sp
             )
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // 🔘 Svarmuligheder
+        question!!.options.forEach { option ->
+            Button(
+                onClick = { viewModel.submitAnswer(option) },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBFFFB8)),
+                shape = RoundedCornerShape(50),
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+                    .fillMaxWidth(0.8f)
+            ) {
+                Text(option, fontFamily = klimaFont)
+            }
+        }
+
+        // ✅ Resultat
+        if (userAnswer != null) {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = if (userAnswer == question!!.correctAnswer) "Korrekt! +10" else "Forkert 😢",
+                fontFamily = klimaFont,
+                fontSize = 20.sp,
+                color = if (userAnswer == question!!.correctAnswer) Color.Green else Color.Red
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = { viewModel.nextQuestion() }) {
+                Text("Næste", fontFamily = klimaFont)
+            }
         }
     }
 }
