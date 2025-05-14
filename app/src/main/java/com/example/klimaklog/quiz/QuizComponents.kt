@@ -12,6 +12,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.klimaklog.quiz.model.QuizQuestion
+import androidx.compose.foundation.clickable
+
+
 
 @Composable
 fun QuizQuestionUI(
@@ -54,6 +57,28 @@ fun QuizQuestionUI(
                 text = if (userAnswer == question.correctAnswer) "Korrekt! +10" else "Forkert 😢",
                 style = TextStyle(fontFamily = klimaFont, fontSize = 20.sp),
                 color = if (userAnswer == question.correctAnswer) Color.Green else Color.Red
+            )
+        }
+    }
+}
+
+
+@Composable
+fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .clickable(onClick = onClick),
+        color = Color(0xFFB2FFB2),
+        shape = RoundedCornerShape(30.dp),
+        shadowElevation = 6.dp
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Text(
+                text = text,
+                fontFamily = font,
+                fontSize = 24.sp
             )
         }
     }

@@ -1,33 +1,33 @@
 package com.example.klimaklog.quiz
 
-import BottomNavigationItem
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.klimaklog.ui.theme.klimaFont
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.ui.components.BottomNavigationBar
+
+
 
 @Composable
-fun QuizOverviewScreen(navController: NavController) {
+fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
+    val totalPoints by viewModel.totalPoints.collectAsState()
+
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                BottomNavigationItem(navController, "search", "Søgning", klimaFont)
-                BottomNavigationItem(navController, "quiz", "Quiz", klimaFont)
-                BottomNavigationItem(navController, "history", "Historik", klimaFont)
-            }
+            BottomNavigationBar(navController = navController, font = klimaFont)
         }
     ) { padding ->
         Column(
@@ -85,14 +85,14 @@ fun QuizOverviewScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Pointvisning
+            // Dynamisk Pointvisning
             Surface(
                 color = Color.LightGray.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(50),
                 shadowElevation = 4.dp
             ) {
                 Text(
-                    text = "Klima Points\n120",
+                    text = "Klima Points\n$totalPoints",
                     fontFamily = klimaFont,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
@@ -102,4 +102,3 @@ fun QuizOverviewScreen(navController: NavController) {
         }
     }
 }
-

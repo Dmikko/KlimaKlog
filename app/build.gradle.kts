@@ -75,6 +75,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 
+    // DataStore for saving data locally
+
+    implementation("androidx.datastore:datastore-preferences:1.1.6")
+
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -17,9 +17,30 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.klimaklog.ui.theme.klimaFont
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.klimaklog.R
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.quiz.QuizButton
+
+
 
 @Composable
-fun QuizScreen(navController: NavController) {
+fun QuizScreen(
+    navController: NavController,
+    viewModel: QuizViewModel = viewModel()
+) {
+    val totalPoints by viewModel.totalPoints.collectAsState()
+
+    val klimaFont = try {
+        FontFamily(Font(R.font.jolly_lodger))
+    } catch (e: Exception) {
+        FontFamily.Default
+    }
+
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -36,7 +57,7 @@ fun QuizScreen(navController: NavController) {
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Back button
+            // Tilbageknap
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
@@ -49,7 +70,6 @@ fun QuizScreen(navController: NavController) {
                 }
             }
 
-            // Titel
             Text(
                 text = "Klima Klog\nQuiz",
                 style = TextStyle(fontFamily = klimaFont, fontSize = 44.sp),
@@ -58,7 +78,6 @@ fun QuizScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Beskrivelse
             Text(
                 text = "Test din viden om klima og CO₂ – tjen point og bliv en klimahelt!",
                 style = TextStyle(fontFamily = klimaFont, fontSize = 16.sp),
@@ -68,55 +87,31 @@ fun QuizScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Knap: Klima Challenges
             QuizButton("Klima Challenges", klimaFont) {
                 navController.navigate("quiz/overview")
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Knap: Personlige Challenges
             QuizButton("Personlige Challenges", klimaFont) {
                 navController.navigate("quiz/personal")
             }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Point visning
             Surface(
                 color = Color.LightGray.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(50),
                 shadowElevation = 4.dp
             ) {
                 Text(
-                    text = "Klima Points\n120",
+                    text = "Klima Points\n$totalPoints",
                     fontFamily = klimaFont,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun QuizButton(text: String, font: androidx.compose.ui.text.font.FontFamily, onClick: () -> Unit) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .clickable(onClick = onClick),
-        color = Color(0xFFB2FFB2),
-        shape = RoundedCornerShape(30.dp),
-        shadowElevation = 6.dp
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Text(
-                text = text,
-                fontFamily = font,
-                fontSize = 24.sp
-            )
         }
     }
 }
