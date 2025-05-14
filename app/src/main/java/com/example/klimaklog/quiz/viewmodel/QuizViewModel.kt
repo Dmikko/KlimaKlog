@@ -1,17 +1,21 @@
-package com.example.klimaklog.quiz.viewmodel
+package com.example.klimaklog.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.klimaklog.quiz.model.QuizQuestion
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class QuizViewModel : ViewModel() {
-    private val allEasyQuestions = listOf(
+
+    // Spørgsmål til "Let" niveau
+    private val easyQuestions = listOf(
         QuizQuestion(
             question = "Hvor meget CO₂ udleder det cirka at producere en bomulds-t-shirt?",
             options = listOf("0,3 kg", "2–4 kg", "9 kg", "15 kg"),
             correctAnswer = "2–4 kg"
         ),
         QuizQuestion(
-            question = "Hvilken fødevare har typisk højest CO₂-aftryk?",
+            question = "Hvilken fødevare har typisk det største CO₂-aftryk?",
             options = listOf("Kartofler", "Oksekød", "Æbler", "Kylling"),
             correctAnswer = "Oksekød"
         )
@@ -20,22 +24,30 @@ class QuizViewModel : ViewModel() {
 
     private var currentIndex = 0
     val currentQuestion: QuizQuestion
-        get() = allEasyQuestions[currentIndex]
+        get() = easyQuestions[currentIndex]
 
-    fun checkAnswer(selected: String): Boolean {
-        return selected == currentQuestion.correctAnswer
+    private val _userAnswer = MutableStateFlow<String?>(null)
+    val userAnswer = _userAnswer.asStateFlow()
+
+    fun submitAnswer(answer: String) {
+        _userAnswer.value = answer
+    }
+
+    fun checkAnswerIsCorrect(): Boolean {
+        return _userAnswer.value == currentQuestion.correctAnswer
     }
 
     fun nextQuestion(): Boolean {
-        return if (currentIndex < allEasyQuestions.size - 1) {
+        if (currentIndex < easyQuestions.size - 1) {
             currentIndex++
-            true
-        } else {
-            false
+            _userAnswer.value = null
+            return true
         }
+        return false
     }
 
     fun resetQuiz() {
         currentIndex = 0
+        _userAnswer.value = null
     }
 }
