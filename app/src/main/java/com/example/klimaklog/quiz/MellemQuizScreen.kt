@@ -1,29 +1,32 @@
 package com.example.klimaklog.quiz
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.klimaklog.ui.theme.klimaFont
 import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.ui.theme.klimaFont
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+
+
 
 
 
 @Composable
-fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
+fun MellemQuizScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
     val question by viewModel.currentQuestion.collectAsState()
     val userAnswer by viewModel.userAnswer.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.loadQuestions("let")
+        viewModel.loadQuestions("mellem")
     }
 
     Column(

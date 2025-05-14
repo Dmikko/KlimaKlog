@@ -2,9 +2,16 @@ package com.example.klimaklog.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.klimaklog.R
+
+
+// ui/theme/Type.kt
+val klimaFont = FontFamily(Font(R.font.jolly_lodger))
+
 
 // Set of Material typography styles to start with
 val Typography = Typography(

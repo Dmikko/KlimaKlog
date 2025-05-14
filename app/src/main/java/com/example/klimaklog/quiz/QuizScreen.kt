@@ -7,26 +7,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.klimaklog.R
+import com.example.klimaklog.ui.theme.klimaFont
 
 @Composable
 fun QuizScreen(navController: NavController) {
-    val klimaFont = try {
-        FontFamily(Font(R.font.jolly_lodger))
-    } catch (e: Exception) {
-        FontFamily.Default
-    }
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -77,14 +70,14 @@ fun QuizScreen(navController: NavController) {
 
             // Knap: Klima Challenges
             QuizButton("Klima Challenges", klimaFont) {
-                // TODO: Navigation til challenges
+                navController.navigate("quiz/overview")
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
             // Knap: Personlige Challenges
             QuizButton("Personlige Challenges", klimaFont) {
-                // TODO: Navigation til personlige
+                navController.navigate("quiz/personal")
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -108,7 +101,7 @@ fun QuizScreen(navController: NavController) {
 }
 
 @Composable
-fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
+fun QuizButton(text: String, font: androidx.compose.ui.text.font.FontFamily, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
