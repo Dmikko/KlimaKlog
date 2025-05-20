@@ -4,13 +4,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import com.example.klimaklog.HistoryScreen
+import com.example.klimaklog.ResultScreen
+import com.example.klimaklog.SearchScreen
+import com.example.klimaklog.quiz.QuizScreen
 import com.example.klimaklog.quiz.LetQuizScreen
 import com.example.klimaklog.quiz.MellemQuizScreen
 import com.example.klimaklog.quiz.PersonalChallengesScreen
 import com.example.klimaklog.quiz.QuizOverviewScreen
-import com.example.klimaklog.quiz.QuizScreen
 import com.example.klimaklog.quiz.SvaerQuizScreen
-import com.example.klimaklog.ui.theme.klimaFont
 
 @Composable
 fun KlimaNavGraph() {

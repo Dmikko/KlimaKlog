@@ -1,27 +1,51 @@
+package com.example.klimaklog
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.klimaklog.R
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-
+import androidx.navigation.NavController
+import com.example.klimaklog.ai.getClimateInfoFromQuery
+import com.example.klimaklog.data.HistoryManager
+import com.example.klimaklog.data.SearchHistoryItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultScreen(navController: NavController, query: String) {
-    val klimaFont = FontFamily(Font(R.font.jolly_lodger)) // Husk at fonten er korrekt tilføjet
+    val klimaFont = FontFamily(Font(R.font.jolly_lodger))
+    val context = LocalContext.current
+    var aiResponse by remember { mutableStateOf("Indlæser...") }
+
+    LaunchedEffect(query) {
+        aiResponse = try {
+            val result = getClimateInfoFromQuery(query)
+            HistoryManager(context).saveSearch(SearchHistoryItem(query, result))
+            result
+        } catch (e: Exception) {
+            "Noget gik galt. Prøv igen senere."
+        }
+    }
+
+    val cards = remember(aiResponse) {
+        aiResponse.split("\n\n").take(4)
+    }
+
+
+    val cardTitles = listOf(
+        "CO₂-aftryk",
+        "Hvad påvirker det?",
+        "Sådan kan du reducere det",
+        "Fun fact"
+    )
 
     Scaffold(
         topBar = {
@@ -42,9 +66,24 @@ fun ResultScreen(navController: NavController, query: String) {
         },
         bottomBar = {
             NavigationBar {
-                BottomNavigationItem(navController, "search", "Søgning", klimaFont)
-                BottomNavigationItem(navController, "quiz", "Quiz", klimaFont)
-                BottomNavigationItem(navController, "history", "Historik", klimaFont)
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("search") },
+                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("quiz") },
+                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("history") },
+                    label = { Text("Historik", fontFamily = klimaFont) },
+                    icon = {}
+                )
             }
         }
     ) { padding ->
@@ -56,43 +95,22 @@ fun ResultScreen(navController: NavController, query: String) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Hvor meget CO₂ udleder en Cheeseburger?",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 20.sp),
+                text = "AI-svar om: \"$query\"",
+                fontSize = 30.sp,
+                fontFamily = klimaFont,
                 textAlign = TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(Modifier.height(24.dp))
 
-            ResultCard("CO₂-aftryk", "En almindelig cheeseburger udleder ca. 2.5–3.5 kg CO₂.\nDet svarer næsten til at køre 15 km i bil.", klimaFont)
-            ResultCard("Hvad påvirker det?", "Kød (især oksekød) står for den største del af udledningen.\nBrødet, osten og transporten bidrager også.", klimaFont)
-            ResultCard("Sådan kan du reducere det", "Vælg en burger med plantefars, drop osten eller spis burger sjældnere.\nDet gør en stor forskel!", klimaFont)
-            ResultCard("Fun fact", "En planteburger udleder typisk under 0.5 kg CO₂\n– næsten 7 gange mindre end en med oksekød.", klimaFont)
+            cards.forEachIndexed { index, text ->
+                ResultCard(
+                    title = cardTitles.getOrNull(index) ?: "",
+                    content = text.trim(),
+                    font = klimaFont
+                )
+            }
         }
     }
 }
 
-@Composable
-fun BottomNavigationItem(navController: NavController, s: String, s1: String, klimaFont: FontFamily) {
-
-}
-
-@Composable
-fun ResultCard(title: String, content: String, font: FontFamily) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFC8FAD8)),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = title, fontFamily = font, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = content, fontFamily = font, fontSize = 14.sp, textAlign = TextAlign.Center)
-        }
-    }
-}
