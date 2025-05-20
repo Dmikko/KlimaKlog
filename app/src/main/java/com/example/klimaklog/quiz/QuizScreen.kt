@@ -1,13 +1,13 @@
 package com.example.klimaklog.quiz
 
-import BottomNavigationItem
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,18 +15,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.klimaklog.ui.theme.klimaFont
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.klimaklog.R
 import com.example.klimaklog.viewmodel.QuizViewModel
-import com.example.klimaklog.quiz.QuizButton
-
-
 
 @Composable
 fun QuizScreen(
@@ -35,18 +27,27 @@ fun QuizScreen(
 ) {
     val totalPoints by viewModel.totalPoints.collectAsState()
 
-    val klimaFont = try {
-        FontFamily(Font(R.font.jolly_lodger))
-    } catch (e: Exception) {
-        FontFamily.Default
-    }
-
     Scaffold(
         bottomBar = {
             NavigationBar {
-                BottomNavigationItem(navController, "search", "Søgning", klimaFont)
-                BottomNavigationItem(navController, "quiz", "Quiz", klimaFont)
-                BottomNavigationItem(navController, "history", "Historik", klimaFont)
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("search") },
+                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { navController.navigate("quiz") },
+                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("history") },
+                    label = { Text("Historik", fontFamily = klimaFont) },
+                    icon = {}
+                )
             }
         }
     ) { padding ->
