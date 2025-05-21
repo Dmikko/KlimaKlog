@@ -24,7 +24,6 @@ fun KlimaNavGraph() {
         composable("search") { SearchScreen(navController) }
         composable("history") { HistoryScreen(navController) }
         composable("quiz") { QuizScreen(navController) }
-        composable("quiz") { QuizScreen(navController) }
         composable(route = "quiz/overview") {
             QuizOverviewScreen(navController)
         }

@@ -29,4 +29,18 @@ class HistoryManager(private val context: Context) {
             emptyList()
         }
     }
+
+    suspend fun clearHistory() {
+        context.historyStore.edit { it.remove(HISTORY_KEY) }
+    }
+
+    suspend fun deleteItem(index: Int) {
+        val current = loadHistory().toMutableList()
+        if (index in current.indices) {
+            current.removeAt(index)
+            val jsonString = json.encodeToString(current)
+            context.historyStore.edit { it[HISTORY_KEY] = jsonString }
+        }
+    }
+
 }

@@ -1,13 +1,14 @@
 package com.example.klimaklog.quiz
 
+// HC og Mike
+
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.klimaklog.quiz.viewmodel.QuizViewModel
 import com.example.klimaklog.ui.theme.klimaFont
-import com.example.klimaklog.viewmodel.QuizViewModel
 
 @Composable
 fun QuizScreen(
@@ -26,6 +27,9 @@ fun QuizScreen(
     viewModel: QuizViewModel = viewModel()
 ) {
     val totalPoints by viewModel.totalPoints.collectAsState()
+    val personalPoints by viewModel.personalPoints.collectAsState()
+    val klimaPoints = totalPoints - personalPoints
+    var showResetDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -100,19 +104,46 @@ fun QuizScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
+            // Pointboks – klikbar
             Surface(
                 color = Color.LightGray.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(50),
-                shadowElevation = 4.dp
+                shadowElevation = 4.dp,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable { showResetDialog = true }
             ) {
-                Text(
-                    text = "Klima Points\n$totalPoints",
-                    fontFamily = klimaFont,
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.Center,
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+                ) {
+                    Text("Klima Quiz: $klimaPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("Personlig Quiz: $personalPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("I alt: $totalPoints", fontFamily = klimaFont, fontSize = 16.sp)
+                }
             }
         }
+    }
+
+    // Nulstil point dialog
+    if (showResetDialog) {
+        AlertDialog(
+            onDismissRequest = { showResetDialog = false },
+            title = { Text("Nulstil point?", fontFamily = klimaFont) },
+            text = { Text("Er du sikker på, at du vil slette alle dine point?", fontFamily = klimaFont) },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.resetAllPoints()
+                    showResetDialog = false
+                }) {
+                    Text("Ja", fontFamily = klimaFont)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showResetDialog = false }) {
+                    Text("Annullér", fontFamily = klimaFont)
+                }
+            }
+        )
     }
 }

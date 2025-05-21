@@ -1,5 +1,7 @@
 package com.example.klimaklog
 
+// HC og Mike
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -54,12 +56,6 @@ fun ResultScreen(navController: NavController, query: String) {
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                actions = {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Klima Points", fontSize = 10.sp, fontFamily = klimaFont)
-                        Text("120", fontSize = 16.sp, fontFamily = klimaFont)
                     }
                 }
             )

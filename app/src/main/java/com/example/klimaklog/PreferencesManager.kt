@@ -1,4 +1,6 @@
-package com.example.klimaklog.data
+package com.example.klimaklog
+
+// Mike
 
 import android.content.Context
 import androidx.datastore.preferences.core.*

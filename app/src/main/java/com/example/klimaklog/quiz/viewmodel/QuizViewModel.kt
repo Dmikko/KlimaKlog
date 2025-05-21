@@ -1,17 +1,19 @@
-package com.example.klimaklog.viewmodel
+package com.example.klimaklog.quiz.viewmodel
 
+// HC
+
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.klimaklog.data.dataStore
+import com.example.klimaklog.dataStore
 import com.example.klimaklog.quiz.model.QuizQuestion
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 @Serializable
@@ -19,9 +21,11 @@ data class QuizQuestionWrapper(val questions: List<QuizQuestion>)
 
 private val Application.dataStore by preferencesDataStore(name = "klima_prefs")
 private val TOTAL_POINTS_KEY = intPreferencesKey("total_klima_points")
+private val PERSONAL_POINTS_KEY = intPreferencesKey("personal_points")
 
 class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
+    @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
 
     companion object {
@@ -30,6 +34,9 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _totalPoints = MutableStateFlow(0)
     val totalPoints = _totalPoints.asStateFlow()
+
+    private val _personalPoints = MutableStateFlow(0)
+    val personalPoints = _personalPoints.asStateFlow()
 
     private val _allQuestions = mutableListOf<QuizQuestion>()
     private var currentIndex = 0
@@ -50,9 +57,12 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     private fun loadSavedPoints() {
         viewModelScope.launch {
             context.dataStore.data.map { prefs ->
-                prefs[TOTAL_POINTS_KEY] ?: 0
-            }.collect { savedPoints ->
-                _totalPoints.value = savedPoints
+                val total = prefs[TOTAL_POINTS_KEY] ?: 0
+                val personal = prefs[PERSONAL_POINTS_KEY] ?: 0
+                total to personal
+            }.collect { (total, personal) ->
+                _totalPoints.value = total
+                _personalPoints.value = personal
             }
         }
     }
@@ -87,15 +97,34 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun loadCustomQuestions(questions: List<QuizQuestion>) {
+        _allQuestions.clear()
+        _allQuestions.addAll(questions)
+        currentIndex = 0
+        _currentQuestion.value = _allQuestions.getOrNull(currentIndex)
+        _userAnswer.value = null
+        _points.value = 0
+    }
+
     fun submitAnswer(answer: String) {
+        // Undgå dobbeltklik
+        if (_userAnswer.value != null) return
+
         _userAnswer.value = answer
+
         if (checkAnswerIsCorrect()) {
             viewModelScope.launch {
                 _totalPoints.value += 10
+                _points.value += 10
+                if (_currentQuestion.value?.level == "personal") {
+                    _personalPoints.value += 10
+                    context.dataStore.edit { it[PERSONAL_POINTS_KEY] = _personalPoints.value }
+                }
                 saveTotalPoints(_totalPoints.value)
             }
         }
     }
+
 
     fun incrementPointsIfCorrect() {
         if (_userAnswer.value == _currentQuestion.value?.correctAnswer) {
@@ -108,14 +137,31 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun nextQuestion(): Boolean {
-        if (currentIndex < _allQuestions.size - 1) {
+        return if (currentIndex < _allQuestions.size - 1) {
             currentIndex++
             _currentQuestion.value = _allQuestions[currentIndex]
             _userAnswer.value = null
-            return true
+            true
+        } else {
+            // NYT: quiz er færdig, ryd spørgsmålet
+            _currentQuestion.value = null
+            false
         }
-        return false
     }
+
+    fun resetAllPoints() {
+        viewModelScope.launch {
+            _totalPoints.value = 0
+            _personalPoints.value = 0
+            context.dataStore.edit {
+                it[TOTAL_POINTS_KEY] = 0
+                it[PERSONAL_POINTS_KEY] = 0
+            }
+        }
+    }
+
+
+
 
     fun resetQuiz() {
         currentIndex = 0

@@ -1,5 +1,7 @@
 package com.example.klimaklog.quiz
 
+// Mike og lidt HC
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -16,9 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.klimaklog.ui.theme.klimaFont
-import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.quiz.viewmodel.QuizViewModel
 import com.example.klimaklog.ui.components.BottomNavigationBar
-
 
 
 @Composable
@@ -76,12 +77,6 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
             Spacer(modifier = Modifier.height(24.dp))
             QuizButton("Svær", klimaFont) { navController.navigate("quiz/svaer") }
 
-            Spacer(modifier = Modifier.height(40.dp))
-
-            // Knap til personlige challenges
-            QuizButton("Personlige Challenges", klimaFont) {
-                navController.navigate("quiz/personal")
-            }
 
             Spacer(modifier = Modifier.weight(1f))
 
