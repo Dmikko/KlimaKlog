@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.screen.quiz
 
 // Mike og lidt HC
 
@@ -17,18 +17,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.klimaklog.ui.components.QuizButton
 import com.example.klimaklog.ui.theme.klimaFont
-import com.example.klimaklog.quiz.viewmodel.QuizViewModel
-import com.example.klimaklog.ui.components.BottomNavigationBar
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.BottomNavigationBar
 
 
 @Composable
 fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
     val totalPoints by viewModel.totalPoints.collectAsState()
+    val personalPoints by viewModel.personalPoints.collectAsState()
+    val klimaPoints = totalPoints - personalPoints
+
 
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(navController = navController, font = klimaFont)
+            NavigationBar {
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("search") },
+                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { navController.navigate("quiz") },
+                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("history") },
+                    label = { Text("Historik", fontFamily = klimaFont) },
+                    icon = {}
+                )
+            }
         }
     ) { padding ->
         Column(
@@ -84,15 +107,18 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
             Surface(
                 color = Color.LightGray.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(50),
-                shadowElevation = 4.dp
+                shadowElevation = 4.dp,
+                modifier = Modifier
+                    .padding(8.dp)
             ) {
-                Text(
-                    text = "Klima Points\n$totalPoints",
-                    fontFamily = klimaFont,
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.Center,
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+                ) {
+                    Text("Klima Quiz: $klimaPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("Personlig Quiz: $personalPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("I alt: $totalPoints", fontFamily = klimaFont, fontSize = 16.sp)
+                }
             }
         }
     }

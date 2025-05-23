@@ -1,10 +1,10 @@
-package com.example.klimaklog.ai
+package com.example.klimaklog.data.remote
 
 // HC
 
 import com.example.klimaklog.BuildConfig
-import com.example.klimaklog.data.SearchHistoryItem
-import com.example.klimaklog.quiz.model.QuizQuestion
+import com.example.klimaklog.model.SearchHistoryItem
+import com.example.klimaklog.model.QuizQuestion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType

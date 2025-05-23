@@ -1,4 +1,4 @@
-package com.example.klimaklog
+package com.example.klimaklog.data.local
 
 // Mike
 

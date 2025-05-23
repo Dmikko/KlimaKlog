@@ -1,7 +1,8 @@
-package com.example.klimaklog
+package com.example.klimaklog.ui.screen.history
 
 // HC
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -13,8 +14,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.klimaklog.data.HistoryManager
-import com.example.klimaklog.data.SearchHistoryItem
+import com.example.klimaklog.data.local.HistoryManager
+import com.example.klimaklog.model.SearchHistoryItem
 import com.example.klimaklog.ui.theme.klimaFont
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 fun HistoryScreen(navController: NavController) {
     val context = LocalContext.current
     var history by remember { mutableStateOf<List<SearchHistoryItem>>(emptyList()) }
+    var expandedCardIndex by remember { mutableStateOf<Int?>(null) }
 
     val scope = rememberCoroutineScope()
 
@@ -79,16 +81,23 @@ fun HistoryScreen(navController: NavController) {
             } else {
                 LazyColumn {
                     itemsIndexed(history) { index, item ->
+                        val isExpanded = expandedCardIndex == index
+
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 8.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFE0F7FA))
+                                .padding(vertical = 8.dp)
+                                .clickable {
+                                    expandedCardIndex = if (isExpanded) null else index
+                                },
                         ) {
                             Column(modifier = Modifier.padding(16.dp)) {
                                 Text("Spørgsmål: ${item.query}", fontWeight = FontWeight.Bold)
                                 Spacer(Modifier.height(4.dp))
-                                Text(item.response.take(200) + "...")
+                                Text(
+                                    text = if (isExpanded) item.response else item.response.take(150) + "...",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
                                 Spacer(Modifier.height(8.dp))
                                 TextButton(
                                     onClick = {

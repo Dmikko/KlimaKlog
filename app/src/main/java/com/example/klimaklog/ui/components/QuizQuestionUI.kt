@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.klimaklog.quiz.model.QuizQuestion
+import com.example.klimaklog.model.QuizQuestion
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.klimaklog
+package com.example.klimaklog.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

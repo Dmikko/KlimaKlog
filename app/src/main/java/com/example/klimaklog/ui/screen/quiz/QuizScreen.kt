@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.screen.quiz
 
 // HC og Mike
 
@@ -18,7 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.klimaklog.quiz.viewmodel.QuizViewModel
+import com.example.klimaklog.ui.components.QuizButton
+import com.example.klimaklog.viewmodel.QuizViewModel
 import com.example.klimaklog.ui.theme.klimaFont
 
 @Composable
@@ -125,7 +126,7 @@ fun QuizScreen(
         }
     }
 
-    // Nulstil point dialog
+    // Nulstil point popup
     if (showResetDialog) {
         AlertDialog(
             onDismissRequest = { showResetDialog = false },

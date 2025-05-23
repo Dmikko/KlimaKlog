@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz.viewmodel
+package com.example.klimaklog.viewmodel
 
 // HC
 
@@ -9,8 +9,8 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.klimaklog.dataStore
-import com.example.klimaklog.quiz.model.QuizQuestion
+import com.example.klimaklog.data.local.dataStore
+import com.example.klimaklog.model.QuizQuestion
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable

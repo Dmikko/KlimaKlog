@@ -1,4 +1,4 @@
-package com.example.klimaklog
+package com.example.klimaklog.ui.screen.search
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.klimaklog.R
 
 @Composable
 fun SearchScreen(navController: NavController) {

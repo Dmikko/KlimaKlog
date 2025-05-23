@@ -1,4 +1,4 @@
-package com.example.klimaklog.ai
+package com.example.klimaklog.data.remote
 
 import android.util.Log
 import com.example.klimaklog.BuildConfig

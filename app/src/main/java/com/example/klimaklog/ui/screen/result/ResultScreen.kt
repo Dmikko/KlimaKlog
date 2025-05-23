@@ -1,4 +1,4 @@
-package com.example.klimaklog
+package com.example.klimaklog.ui.screen.result
 
 // HC og Mike
 
@@ -16,9 +16,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.klimaklog.ai.getClimateInfoFromQuery
-import com.example.klimaklog.data.HistoryManager
-import com.example.klimaklog.data.SearchHistoryItem
+import com.example.klimaklog.R
+import com.example.klimaklog.ui.components.ResultCard
+import com.example.klimaklog.data.remote.getClimateInfoFromQuery
+import com.example.klimaklog.data.local.HistoryManager
+import com.example.klimaklog.model.SearchHistoryItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

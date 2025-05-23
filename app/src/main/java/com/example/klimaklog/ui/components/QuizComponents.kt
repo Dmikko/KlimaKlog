@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +11,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.klimaklog.quiz.model.QuizQuestion
+import com.example.klimaklog.model.QuizQuestion
 import androidx.compose.foundation.clickable
 
 
@@ -80,6 +80,34 @@ fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
                 fontFamily = font,
                 fontSize = 24.sp
             )
+        }
+    }
+}
+
+@Composable
+fun PointBox(
+    klimaPoints: Int,
+    personalPoints: Int,
+    totalPoints: Int,
+    font: FontFamily
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .padding(vertical = 8.dp),
+        color = Color(0xFFB2FFB2), // samme grønne farve som i QuizButton
+        shape = RoundedCornerShape(30.dp),
+        shadowElevation = 6.dp
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("Klima Quiz: $klimaPoints", fontFamily = font, fontSize = 14.sp)
+            Text("Personlig Quiz: $personalPoints", fontFamily = font, fontSize = 14.sp)
+            Text("I alt: $totalPoints", fontFamily = font, fontSize = 16.sp)
         }
     }
 }

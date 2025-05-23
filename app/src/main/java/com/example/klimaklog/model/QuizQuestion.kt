@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz.model
+package com.example.klimaklog.model
 
 import kotlinx.serialization.Serializable
 

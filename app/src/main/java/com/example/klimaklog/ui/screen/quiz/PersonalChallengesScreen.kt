@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.screen.quiz
 
 // HC og Mike
 
@@ -18,9 +18,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.klimaklog.R
-import com.example.klimaklog.ai.generatePersonalQuizFromHistory
-import com.example.klimaklog.data.HistoryManager
-import com.example.klimaklog.quiz.viewmodel.QuizViewModel
+import com.example.klimaklog.data.remote.generatePersonalQuizFromHistory
+import com.example.klimaklog.data.local.HistoryManager
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.ui.components.QuizQuestionUI
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +35,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
     val userAnswer by viewModel.userAnswer.collectAsState()
     val points by viewModel.points.collectAsState()
 
-    // 👇 NY: track når quiz er færdig
+
     var isQuizFinished by remember { mutableStateOf(false) }
 
     var isLoading by remember { mutableStateOf(true) }
@@ -45,11 +46,11 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
             try {
                 val history = HistoryManager(context).loadHistory()
                 if (history.isEmpty()) {
-                    errorMessage = "Du har endnu ikke stillet spørgsmål."
+                    errorMessage = "Du har endnu ikke stillet spørgsmål. Gå til search og stil spørgsmål om klima og din hverdag."
                 } else {
                     val generatedQuestions = generatePersonalQuizFromHistory(history)
                     if (generatedQuestions.isEmpty()) {
-                        errorMessage = "AI kunne ikke generere spørgsmål."
+                        errorMessage = "AI kunne ikke generere din personlige quiz."
                     } else {
                         viewModel.loadCustomQuestions(generatedQuestions)
                     }

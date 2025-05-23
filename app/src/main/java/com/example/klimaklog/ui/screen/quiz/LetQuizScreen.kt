@@ -1,4 +1,4 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.screen.quiz
 
 // HC og Mike
 
@@ -16,7 +16,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.example.klimaklog.R
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.klimaklog.quiz.viewmodel.QuizViewModel
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.ui.components.QuizQuestionUI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,8 +61,7 @@ fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewM
                         onNext = {
                             val hasNext = viewModel.nextQuestion()
                             if (!hasNext) isQuizFinished = true
-                        }
-                        ,
+                        },
                         font = klimaFont
                     )
                 }
