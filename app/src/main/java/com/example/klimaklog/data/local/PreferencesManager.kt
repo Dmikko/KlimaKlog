@@ -2,6 +2,8 @@ package com.example.klimaklog.data.local
 
 // Mike
 
+// bruger det den her fil?
+
 import android.content.Context
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore

@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 
+// implementer dette efter rapport.
+
 @Composable
 fun BottomNavigationBar(navController: NavController, font: FontFamily) {
     NavigationBar(containerColor = Color.White) {

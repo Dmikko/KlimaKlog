@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.klimaklog.R
 
+// bruger vi dette?
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClimateChallengesScreen(navController: NavController) {

@@ -19,7 +19,7 @@ import kotlinx.serialization.json.Json
 @Serializable
 data class QuizQuestionWrapper(val questions: List<QuizQuestion>)
 
-private val Application.dataStore by preferencesDataStore(name = "klima_prefs")
+private val Application.dataStore by preferencesDataStore(name = "klima_prefs") // Bruger vi dette?
 private val TOTAL_POINTS_KEY = intPreferencesKey("total_klima_points")
 private val PERSONAL_POINTS_KEY = intPreferencesKey("personal_points")
 
@@ -126,7 +126,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun incrementPointsIfCorrect() {
+    fun incrementPointsIfCorrect() { // ??????????????
         if (_userAnswer.value == _currentQuestion.value?.correctAnswer) {
             _points.value += 10
         }
@@ -159,8 +159,6 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
-
 
 
     fun resetQuiz() {
