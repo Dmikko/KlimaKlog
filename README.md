@@ -73,9 +73,6 @@
 ├── assets/
 │ └── quiz_questions.json
 
-yaml
-Kopiér
-Rediger
 
 ---
 
