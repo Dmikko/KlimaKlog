@@ -1,10 +1,11 @@
+package com.example.klimaklog.ui.screen.search
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -15,7 +16,6 @@ import com.example.klimaklog.R
 
 @Composable
 fun SearchScreen(navController: NavController) {
-    // Hvis fonten ikke er tilgængelig, brug FontFamily.Default midlertidigt
     val klimaFont = try {
         FontFamily(Font(R.font.jolly_lodger))
     } catch (e: Exception) {
@@ -81,7 +81,7 @@ fun SearchScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    if (query.isNotBlank()) navController.navigate("result/$query")
+                    if (query.isNotBlank()) navController.navigate("result/${query}")
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
                 shape = RoundedCornerShape(50),
@@ -93,7 +93,4 @@ fun SearchScreen(navController: NavController) {
             }
         }
     }
-
-
-
 }

@@ -1,0 +1,334 @@
+{
+  "questions": [
+    {
+      "text": "Hvor meget CO₂ udleder det cirka at producere en almindelig bomulds-t-shirt?",
+      "options": [
+        "0,3 kg",
+        "2–4 kg",
+        "9 kg",
+        "15 kg"
+      ],
+      "correctAnswer": "2–4 kg",
+      "level": "let"
+    },
+    {
+      "text": "Hvad kan du gøre for at spare strøm derhjemme?",
+      "options": [
+        "Lade lys være tændt",
+        "Bruge LED-pærer",
+        "Brænde affald i haven",
+        "Vaske med varmt vand altid"
+      ],
+      "correctAnswer": "Bruge LED-pærer",
+      "level": "let"
+    },
+    {
+      "text": "Hvilket transportmiddel udleder mindst CO₂?",
+      "options": [
+        "Fly",
+        "Bil",
+        "Cykel",
+        "Dieselbus"
+      ],
+      "correctAnswer": "Cykel",
+      "level": "let"
+    },
+    {
+      "text": "Hvilken af følgende madvarer har lavest klimaaftryk?",
+      "options": [
+        "Oksekød",
+        "Svinefars",
+        "Kylling",
+        "Linser"
+      ],
+      "correctAnswer": "Linser",
+      "level": "let"
+    },
+    {
+      "text": "Hvad betyder CO₂?",
+      "options": [
+        "Chloroxid",
+        "Kulilte",
+        "Kuldioxid",
+        "Carbondioxid"
+      ],
+      "correctAnswer": "Kuldioxid",
+      "level": "let"
+    },
+    {
+      "text": "Hvad kan man gøre med gammelt tøj i stedet for at smide det ud?",
+      "options": [
+        "Brænde det",
+        "Genbruge eller aflevere det",
+        "Smide det i naturen",
+        "Skylle det ud"
+      ],
+      "correctAnswer": "Genbruge eller aflevere det",
+      "level": "let"
+    },
+    {
+      "text": "Hvordan kan du mindske CO₂-udledning når du vasker tøj?",
+      "options": [
+        "Brug tørretumbler",
+        "Vaske på høj varme",
+        "Vaske fulde maskiner",
+        "Bruge meget vaskemiddel"
+      ],
+      "correctAnswer": "Vaske fulde maskiner",
+      "level": "let"
+    },
+    {
+      "text": "Hvorfor er det godt at spise mindre kød?",
+      "options": [
+        "Det smager dårligt",
+        "Det reducerer CO₂-udledning",
+        "Det gør dig rig",
+        "Det tager længere tid at lave"
+      ],
+      "correctAnswer": "Det reducerer CO₂-udledning",
+      "level": "let"
+    },
+    {
+      "text": "Hvad kan man samle regnvand til?",
+      "options": [
+        "Spilde det",
+        "Vande planter",
+        "Bruge som drikkevand direkte",
+        "Skylle bilen indendørs"
+      ],
+      "correctAnswer": "Vande planter",
+      "level": "let"
+    },
+    {
+      "text": "Hvilket materiale er bedst for klimaet?",
+      "options": [
+        "Plastik",
+        "Papir",
+        "Metal",
+        "Genbrugsmateriale"
+      ],
+      "correctAnswer": "Genbrugsmateriale",
+      "level": "let"
+    },
+    {
+      "text": "Hvilken energikilde udleder mindst drivhusgas?",
+      "options": [
+        "Kul",
+        "Olie",
+        "Vind",
+        "Naturgas"
+      ],
+      "correctAnswer": "Vind",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvor meget CO₂ udleder en gennemsnitlig dansker om året?",
+      "options": [
+        "2 ton",
+        "6 ton",
+        "11 ton",
+        "20 ton"
+      ],
+      "correctAnswer": "11 ton",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvad er en energimærkning på apparater?",
+      "options": [
+        "Et dekorativt mærke",
+        "Et mærke for kvalitet",
+        "En vurdering af energiforbrug",
+        "En godkendelse fra staten"
+      ],
+      "correctAnswer": "En vurdering af energiforbrug",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvad betyder bæredygtighed?",
+      "options": [
+        "Noget der er billigt",
+        "Noget der holder længe",
+        "Noget der kan genbruges",
+        "Noget der ikke belaster fremtiden"
+      ],
+      "correctAnswer": "Noget der ikke belaster fremtiden",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvilken handling sparer mest strøm?",
+      "options": [
+        "Slukke for standby",
+        "Bruge mikroovn",
+        "Bruge vaskemaskine kl. 18",
+        "Koge vand med låg"
+      ],
+      "correctAnswer": "Slukke for standby",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvad er formålet med affaldssortering?",
+      "options": [
+        "Gøre affald tungere",
+        "Sænke skatter",
+        "Genanvende materialer",
+        "Fylde flere skraldespande"
+      ],
+      "correctAnswer": "Genanvende materialer",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvilken fødevare udleder mest CO₂ pr. kg?",
+      "options": [
+        "Ost",
+        "Kylling",
+        "Oksekød",
+        "Kartofler"
+      ],
+      "correctAnswer": "Oksekød",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvordan hjælper kollektiv transport klimaet?",
+      "options": [
+        "Det er dyrere",
+        "Det skaber arbejde",
+        "Det samler mange mennesker i én transportform",
+        "Det tager længere tid"
+      ],
+      "correctAnswer": "Det samler mange mennesker i én transportform",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvordan kan man reducere strømforbrug fra opladere?",
+      "options": [
+        "Bruge gamle opladere",
+        "Lade dem sidde i stikket",
+        "Fjerne dem når de ikke er i brug",
+        "Bruge større stikdåser"
+      ],
+      "correctAnswer": "Fjerne dem når de ikke er i brug",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvad sker der med metan fra køer?",
+      "options": [
+        "Det bliver brugt til energi",
+        "Det nedbrydes hurtigt",
+        "Det er en drivhusgas",
+        "Det bruges som gødning"
+      ],
+      "correctAnswer": "Det er en drivhusgas",
+      "level": "mellem"
+    },
+    {
+      "text": "Hvor meget CO₂ udleder en flyrejse fra København til Bangkok tur/retur per person?",
+      "options": [
+        "300 kg",
+        "900 kg",
+        "2.1 ton",
+        "4 ton"
+      ],
+      "correctAnswer": "2.1 ton",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvad er IPCC?",
+      "options": [
+        "Et klimaanlæg",
+        "Et FN-klimaråd",
+        "En dansk myndighed",
+        "Et batterifirma"
+      ],
+      "correctAnswer": "Et FN-klimaråd",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvilken sektor i Danmark udleder mest drivhusgas?",
+      "options": [
+        "Energi",
+        "Landbrug",
+        "Transport",
+        "Husholdninger"
+      ],
+      "correctAnswer": "Landbrug",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvad er 'CO₂-ækvivalenter'?",
+      "options": [
+        "CO₂-målinger i akvarier",
+        "En måde at måle al drivhusgas som CO₂",
+        "CO₂ i væskeform",
+        "Mængde træ plantet"
+      ],
+      "correctAnswer": "En måde at måle al drivhusgas som CO₂",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvordan kan man bedst lagre vedvarende energi?",
+      "options": [
+        "Batterier",
+        "CO₂ beholdere",
+        "Dæmninger",
+        "Gasovne"
+      ],
+      "correctAnswer": "Batterier",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvilket land udleder mest CO₂ i absolutte tal?",
+      "options": [
+        "USA",
+        "Indien",
+        "Kina",
+        "Rusland"
+      ],
+      "correctAnswer": "Kina",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvordan påvirker tøjproduktion klimaet?",
+      "options": [
+        "Det gør det renere",
+        "Det bruger meget vand og energi",
+        "Det hjælper fattige lande",
+        "Det reducerer affald"
+      ],
+      "correctAnswer": "Det bruger meget vand og energi",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvad er et 'carbon footprint'?",
+      "options": [
+        "Et fodspor lavet af kul",
+        "Den samlede mængde CO₂ man udleder",
+        "Et mærke på miljøvenlige varer",
+        "Et klimabevis"
+      ],
+      "correctAnswer": "Den samlede mængde CO₂ man udleder",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvad sker der ved 2 graders global opvarmning?",
+      "options": [
+        "Ingen mærkbar forskel",
+        "Risiko for ekstreme vejrhændelser",
+        "Alle isbjerge smelter",
+        "Jorden bliver grønnere"
+      ],
+      "correctAnswer": "Risiko for ekstreme vejrhændelser",
+      "level": "svaer"
+    },
+    {
+      "text": "Hvordan påvirker permafrost klimaet?",
+      "options": [
+        "Det reflekterer varme",
+        "Det holder på CO₂",
+        "Det frigiver metan ved optøning",
+        "Det reducerer havstigninger"
+      ],
+      "correctAnswer": "Det frigiver metan ved optøning",
+      "level": "svaer"
+    }
+  ]
+}

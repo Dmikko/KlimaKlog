@@ -1,7 +1,7 @@
-package com.example.klimaklog.quiz
+package com.example.klimaklog.ui.screen.quiz
 
-import BottomNavigationItem
-import androidx.compose.foundation.clickable
+// Mike og lidt HC
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -12,27 +12,45 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.klimaklog.R
+import com.example.klimaklog.ui.components.QuizButton
+import com.example.klimaklog.ui.theme.klimaFont
+import com.example.klimaklog.viewmodel.QuizViewModel
+import com.example.klimaklog.BottomNavigationBar
+
 
 @Composable
-fun QuizScreen(navController: NavController) {
-    val klimaFont = try {
-        FontFamily(Font(R.font.jolly_lodger))
-    } catch (e: Exception) {
-        FontFamily.Default
-    }
+fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
+    val totalPoints by viewModel.totalPoints.collectAsState()
+    val personalPoints by viewModel.personalPoints.collectAsState()
+    val klimaPoints = totalPoints - personalPoints
+
+
     Scaffold(
         bottomBar = {
             NavigationBar {
-                BottomNavigationItem(navController, "search", "Søgning", klimaFont)
-                BottomNavigationItem(navController, "quiz", "Quiz", klimaFont)
-                BottomNavigationItem(navController, "history", "Historik", klimaFont)
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("search") },
+                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = true,
+                    onClick = { navController.navigate("quiz") },
+                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    icon = {}
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("history") },
+                    label = { Text("Historik", fontFamily = klimaFont) },
+                    icon = {}
+                )
             }
         }
     ) { padding ->
@@ -43,7 +61,7 @@ fun QuizScreen(navController: NavController) {
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Back button
+            // Tilbageknap
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
@@ -75,55 +93,33 @@ fun QuizScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Knap: Klima Challenges
-            QuizButton("Klima Challenges", klimaFont) {
-                // TODO: Navigation til challenges
-            }
-
+            // Knapper til quizniveauer
+            QuizButton("Let", klimaFont) { navController.navigate("quiz/let") }
             Spacer(modifier = Modifier.height(24.dp))
+            QuizButton("Mellem", klimaFont) { navController.navigate("quiz/mellem") }
+            Spacer(modifier = Modifier.height(24.dp))
+            QuizButton("Svær", klimaFont) { navController.navigate("quiz/svaer") }
 
-            // Knap: Personlige Challenges
-            QuizButton("Personlige Challenges", klimaFont) {
-                // TODO: Navigation til personlige
-            }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Point visning
+            // Dynamisk Pointvisning
             Surface(
                 color = Color.LightGray.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(50),
-                shadowElevation = 4.dp
+                shadowElevation = 4.dp,
+                modifier = Modifier
+                    .padding(8.dp)
             ) {
-                Text(
-                    text = "Klima Points\n120",
-                    fontFamily = klimaFont,
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.Center,
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+                ) {
+                    Text("Klima Quiz: $klimaPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("Personlig Quiz: $personalPoints", fontFamily = klimaFont, fontSize = 14.sp)
+                    Text("I alt: $totalPoints", fontFamily = klimaFont, fontSize = 16.sp)
+                }
             }
-        }
-    }
-}
-
-@Composable
-fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .clickable(onClick = onClick),
-        color = Color(0xFFB2FFB2),
-        shape = RoundedCornerShape(30.dp),
-        shadowElevation = 6.dp
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Text(
-                text = text,
-                fontFamily = font,
-                fontSize = 24.sp
-            )
         }
     }
 }
