@@ -22,7 +22,7 @@ suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatc
         3. Sådan kan du reducere det: Giv forslag til grønnere valg.
         4. Fun fact: En sjov, positiv ekstra information.
         
-        Tilføj tilsvarende emoji før navnet(f.eks. 🧃Juice, 🌭hotdog, 🍕pizzeslice, 👕Tshirt etc)
+        Tilføj tilsvarende emojis til hver spørgsmål, brugeren stiller (f.eks. 🧃Juice, 🌭hotdog, 🍕pizzeslice, 👕Tshirt etc)
         
 
         Brug to nye linjer (\n\n) mellem hvert afsnit.
