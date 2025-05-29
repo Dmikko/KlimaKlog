@@ -40,7 +40,18 @@ fun ResultScreen(navController: NavController, query: String) {
     }
 
     val cards = remember(aiResponse) {
-        aiResponse.split("\n\n").take(4)
+        if (!aiResponse.contains("\n\n")) return@remember emptyList()
+
+        aiResponse
+            .split("\n\n")
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .let { chunks ->
+                if (chunks.firstOrNull()
+                        ?.startsWith("CO", ignoreCase = true) == true
+                ) chunks else chunks.drop(1)
+            }
+            .take(4)
     }
 
 
@@ -101,13 +112,30 @@ fun ResultScreen(navController: NavController, query: String) {
 
             Spacer(Modifier.height(24.dp))
 
-            cards.forEachIndexed { index, text ->
-                ResultCard(
-                    title = cardTitles.getOrNull(index) ?: "",
-                    content = text.trim(),
-                    font = klimaFont
+            // Skrevet med hjælp fra ChatGPT
+            if (cards.isEmpty()) {
+                // Stadig i gang med at hente / parse
+                Text(
+                    text = "Indlæser…",
+                    fontSize = 20.sp,
+                    fontFamily = klimaFont,
+                    modifier = Modifier.padding(top = 24.dp)
                 )
+                CircularProgressIndicator(modifier = Modifier.padding(top = 12.dp))
+            } else {
+                // Vi har data – vis kortene
+                cards.forEachIndexed { index, rawText ->
+                    val body = rawText.substringAfter(":", rawText).trim()
+
+                    ResultCard(
+                        title   = cardTitles.getOrNull(index) ?: "",
+                        content = body,
+                        font    = klimaFont
+                    )
+                }
             }
+
+
         }
     }
 }
