@@ -85,7 +85,7 @@
 
 2. **Klon projektet**
    ```bash
-   git clone https://github.com/[dit-brugernavn]/Klimaklog.git
+   git clone https://github.com/Dmikko/KlimaKlog.git
 Kør projektet
 Åbn i Android Studio og start direkte på emulator eller fysisk enhed.
 
