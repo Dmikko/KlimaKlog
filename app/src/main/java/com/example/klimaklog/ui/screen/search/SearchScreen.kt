@@ -2,6 +2,8 @@ package com.example.klimaklog.ui.screen.search
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,8 +23,13 @@ fun SearchScreen(navController: NavController) {
     } catch (e: Exception) {
         FontFamily.Default
     }
+
     var query by remember { mutableStateOf("") }
 
+    // Ny state til at styre om popup vises
+    var showDialog by remember { mutableStateOf(false) }
+
+    // Hele skærmen
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -54,6 +61,20 @@ fun SearchScreen(navController: NavController) {
                 .padding(horizontal = 24.dp, vertical = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Info-knap øverst til højre
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.TopEnd
+            ) {
+                IconButton(onClick = { showDialog = true }) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Hjælp"
+                    )
+                }
+            }
+
             Text(
                 text = "Klima Klog",
                 style = TextStyle(fontFamily = klimaFont, fontSize = 40.sp)
@@ -92,5 +113,27 @@ fun SearchScreen(navController: NavController) {
                 Text("Søg", fontSize = 20.sp, fontFamily = klimaFont)
             }
         }
+    }
+
+    // Forklarings-popup (AlertDialog)
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = {
+                Text("Hvordan fungerer det?")
+            },
+            text = {
+                Text("Skriv noget som du vil lære mere om. " +
+                        "Det kan være alt fra hvad du har spist i dag, " +
+                        "hvor langt du har kørt i bil," +
+                        "hvad for et program du vaskemaskine har kørt på, " +
+                        "eller noget helt fjerde!.")
+            },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("Forstået")
+                }
+            }
+        )
     }
 }
