@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.klimaklog.model.QuizQuestion
 import androidx.compose.foundation.clickable
-
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 
 
 @Composable
@@ -65,25 +66,26 @@ fun QuizQuestionUI(
 
 @Composable
 fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
-    Surface(
+    Button(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
-            .clickable(onClick = onClick),
-        color = Color(0xFFB2FFB2),
-        shape = RoundedCornerShape(30.dp),
-        shadowElevation = 6.dp
+            .height(60.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        ),
+        shape = RoundedCornerShape(24.dp)
     ) {
-        Box(contentAlignment = Alignment.Center) {
-            Text(
-                text = text,
-                fontFamily = font,
-                fontSize = 24.sp
-            )
-        }
+        Text(
+            text = text,
+            fontFamily = font,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
     }
 }
-
 @Composable
 fun PointBox(
     klimaPoints: Int,
