@@ -23,6 +23,7 @@ import com.example.klimaklog.data.local.HistoryManager
 import com.example.klimaklog.model.SearchHistoryItem
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import com.example.klimaklog.ui.theme.klimaFontTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,7 +110,7 @@ fun ResultScreen(navController: NavController, query: String) {
             Text(
                 text = "AI-svar om: \"$query\"",
                 fontSize = 30.sp,
-                fontFamily = klimaFont,
+                fontFamily = klimaFontTitle,
                 textAlign = TextAlign.Center
             )
 
