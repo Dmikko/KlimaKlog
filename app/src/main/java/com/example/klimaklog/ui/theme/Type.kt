@@ -10,7 +10,8 @@ import com.example.klimaklog.R
 
 
 // ui/theme/Type.kt
-val klimaFont = FontFamily(Font(R.font.jolly_lodger))
+val klimaFontTitle = FontFamily(Font(R.font.jolly_lodger))
+val klimaFont = FontFamily(Font(R.font.roboto))
 
 
 // Set of Material typography styles to start with

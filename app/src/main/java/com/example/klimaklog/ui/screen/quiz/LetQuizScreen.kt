@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.klimaklog.R
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,7 +24,7 @@ import com.example.klimaklog.ui.components.QuizQuestionUI
 @Composable
 fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
     val klimaFont = remember {
-        try { FontFamily(Font(R.font.jolly_lodger)) } catch (e: Exception) { FontFamily.Default }
+        try { FontFamily(Font(R.font.roboto)) } catch (e: Exception) { FontFamily.Default }
     }
 
     val question by viewModel.currentQuestion.collectAsState()

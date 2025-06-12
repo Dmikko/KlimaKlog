@@ -15,18 +15,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.klimaklog.R
+import com.example.klimaklog.ui.theme.klimaFontTitle
 
 // bruger vi dette?
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClimateChallengesScreen(navController: NavController) {
-    val klimaFont = FontFamily(Font(R.font.jolly_lodger))
+    val klimaFont = FontFamily(Font(R.font.roboto))
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Klima Klog Quiz", fontFamily = klimaFont) },
+                title = { Text("Klima Klog Quiz", fontFamily = klimaFontTitle) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Tilbage")
@@ -50,15 +51,15 @@ fun ClimateChallengesScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            DifficultyButton("Let", Color(0xFFB6F8C2), klimaFont) {
+            DifficultyButton("Let", Color(0xFFB6F8C2), klimaFontTitle) {
                 navController.navigate("quiz_easy")
             }
 
-            DifficultyButton("Mellem", Color(0xFFF6F49D), klimaFont) {
+            DifficultyButton("Mellem", Color(0xFFF6F49D), klimaFontTitle) {
                 navController.navigate("quiz_medium")
             }
 
-            DifficultyButton("Svær", Color(0xFFF8B6B6), klimaFont) {
+            DifficultyButton("Svær", Color(0xFFF8B6B6), klimaFontTitle) {
                 navController.navigate("quiz_hard")
             }
         }

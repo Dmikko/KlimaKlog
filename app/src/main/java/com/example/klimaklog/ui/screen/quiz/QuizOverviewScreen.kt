@@ -36,19 +36,19 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = true,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont) },
+                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
             }

@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
-    val klimaFont = remember { FontFamily(Font(R.font.jolly_lodger)) }
+    val klimaFont = remember { FontFamily(Font(R.font.roboto)) }
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 

@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import com.example.klimaklog.ui.components.QuizButton
 import com.example.klimaklog.viewmodel.QuizViewModel
 import com.example.klimaklog.ui.theme.klimaFont
+import com.example.klimaklog.ui.theme.klimaFontTitle
 
 @Composable
 fun QuizScreen(
@@ -38,19 +39,19 @@ fun QuizScreen(
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = true,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont) },
+                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
             }
@@ -78,7 +79,7 @@ fun QuizScreen(
 
             Text(
                 text = "Klima Klog\nQuiz",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 44.sp),
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 44.sp),
                 textAlign = TextAlign.Center
             )
 
@@ -93,13 +94,13 @@ fun QuizScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            QuizButton("Klima Challenges", klimaFont) {
+            QuizButton("Klima Challenges", klimaFontTitle) {
                 navController.navigate("quiz/overview")
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            QuizButton("Personlige Challenges", klimaFont) {
+            QuizButton("Personlige Challenges", klimaFontTitle) {
                 navController.navigate("quiz/personal")
             }
 

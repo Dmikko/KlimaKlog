@@ -25,7 +25,7 @@ import com.example.klimaklog.model.SearchHistoryItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultScreen(navController: NavController, query: String) {
-    val klimaFont = FontFamily(Font(R.font.jolly_lodger))
+    val klimaFont = FontFamily(Font(R.font.roboto))
     val context = LocalContext.current
     var aiResponse by remember { mutableStateOf("Indlæser...") }
 
@@ -78,19 +78,19 @@ fun ResultScreen(navController: NavController, query: String) {
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont) },
+                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
             }

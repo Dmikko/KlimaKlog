@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.klimaklog.data.local.HistoryManager
 import com.example.klimaklog.model.SearchHistoryItem
@@ -53,19 +54,19 @@ fun HistoryScreen(navController: NavController) {
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont) },
+                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont) },
+                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = true,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont) },
+                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
                     icon = {}
                 )
             }
