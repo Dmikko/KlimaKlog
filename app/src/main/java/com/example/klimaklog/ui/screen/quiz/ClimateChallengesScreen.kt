@@ -18,11 +18,12 @@ import com.example.klimaklog.R
 import com.example.klimaklog.ui.theme.klimaFontTitle
 
 // bruger vi dette?
+// Nope, det var base, men den ligger her bare i tilfælde af noget brækker sig
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClimateChallengesScreen(navController: NavController) {
-    val klimaFont = FontFamily(Font(R.font.roboto))
+    val klimaFont = FontFamily(Font(R.font.jolly_lodger))
 
     Scaffold(
         topBar = {
@@ -45,8 +46,8 @@ fun ClimateChallengesScreen(navController: NavController) {
         ) {
             Text(
                 text = "Vælg en sværhedsgrad og test din klimaviden!",
-                fontFamily = klimaFont,
-                fontSize = 18.sp
+                fontFamily = klimaFontTitle,
+                fontSize = 20.sp
             )
 
             Spacer(modifier = Modifier.height(32.dp))

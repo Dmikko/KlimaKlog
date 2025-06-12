@@ -22,12 +22,13 @@ import com.example.klimaklog.data.remote.generatePersonalQuizFromHistory
 import com.example.klimaklog.data.local.HistoryManager
 import com.example.klimaklog.viewmodel.QuizViewModel
 import com.example.klimaklog.ui.components.QuizQuestionUI
+import com.example.klimaklog.ui.theme.klimaFontTitle
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
-    val klimaFont = remember { FontFamily(Font(R.font.roboto)) }
+    val klimaFont = remember { FontFamily(Font(R.font.jolly_lodger)) }
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -66,7 +67,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Personlig Quiz", fontFamily = klimaFont, fontSize = 20.sp) },
+                title = { Text("Personlig Quiz", fontFamily = klimaFontTitle, fontSize = 20.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Tilbage")
@@ -88,7 +89,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                     ) {
                         CircularProgressIndicator()
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("AI laver din quiz...", fontFamily = klimaFont)
+                        Text("AI laver din quiz...", fontFamily = klimaFontTitle)
                     }
                 }
 
@@ -108,9 +109,9 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text("Du har gennemført den personlige quiz!", fontFamily = klimaFont, fontSize = 24.sp)
+                        Text("Du har gennemført den personlige quiz!", fontFamily = klimaFontTitle, fontSize = 24.sp)
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Personlige point: $points", fontFamily = klimaFont, fontSize = 20.sp)
+                        Text("Personlige point: $points", fontFamily = klimaFontTitle, fontSize = 20.sp)
                         Spacer(modifier = Modifier.height(24.dp))
                         Button(
                             onClick = {
@@ -119,7 +120,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                             },
                             shape = RoundedCornerShape(30.dp)
                         ) {
-                            Text("Tilbage", fontFamily = klimaFont)
+                            Text("Tilbage", fontFamily = klimaFontTitle)
                         }
                     }
                 }
@@ -134,12 +135,12 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                             val hasNext = viewModel.nextQuestion()
                             if (!hasNext) isQuizFinished = true // 👈 NY: Slut
                         },
-                        font = klimaFont
+                        font = klimaFontTitle
                     )
                 }
 
                 else -> {
-                    Text("Ingen spørgsmål fundet.", fontFamily = klimaFont, modifier = Modifier.padding(24.dp))
+                    Text("Ingen spørgsmål fundet.", fontFamily = klimaFontTitle, modifier = Modifier.padding(24.dp))
                 }
             }
         }

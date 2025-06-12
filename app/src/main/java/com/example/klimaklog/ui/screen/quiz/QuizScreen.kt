@@ -87,7 +87,7 @@ fun QuizScreen(
 
             Text(
                 text = "Test din viden om klima og CO₂ – tjen point og bliv en klimahelt!",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 16.sp),
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 16.sp),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )

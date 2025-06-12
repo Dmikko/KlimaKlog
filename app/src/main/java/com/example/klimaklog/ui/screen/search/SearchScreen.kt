@@ -38,20 +38,20 @@ fun SearchScreen(navController: NavController) {
                 NavigationBarItem(
                     selected = true,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Søgning", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
 
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Quiz", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Historik", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
                 )
             }
@@ -80,14 +80,14 @@ fun SearchScreen(navController: NavController) {
 
             Text(
                 text = "Klima Klog",
-                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 40.sp)
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 80.sp)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
                 text = "Hvad vil du gerne klima-vide noget mere om?",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 18.sp)
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 22.sp)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -113,7 +113,7 @@ fun SearchScreen(navController: NavController) {
                     .width(150.dp)
                     .height(50.dp)
             ) {
-                Text("Søg", fontSize = 20.sp, fontFamily = klimaFont)
+                Text("Søg", fontSize = 30.sp, fontFamily = klimaFontTitle)
             }
         }
     }

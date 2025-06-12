@@ -21,6 +21,7 @@ import com.example.klimaklog.ui.components.QuizButton
 import com.example.klimaklog.ui.theme.klimaFont
 import com.example.klimaklog.viewmodel.QuizViewModel
 import com.example.klimaklog.BottomNavigationBar
+import com.example.klimaklog.ui.theme.klimaFontTitle
 
 
 @Composable
@@ -77,7 +78,7 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
             // Titel
             Text(
                 text = "Klima Klog\nQuiz",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 44.sp),
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 44.sp),
                 textAlign = TextAlign.Center
             )
 
@@ -86,7 +87,7 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
             // Beskrivelse
             Text(
                 text = "Test din viden om klima og CO₂ – tjen point og bliv en klimahelt!",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 16.sp),
+                style = TextStyle(fontFamily = klimaFontTitle, fontSize = 16.sp),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
@@ -94,11 +95,11 @@ fun QuizOverviewScreen(navController: NavController, viewModel: QuizViewModel = 
             Spacer(modifier = Modifier.height(32.dp))
 
             // Knapper til quizniveauer
-            QuizButton("Let", klimaFont) { navController.navigate("quiz/let") }
+            QuizButton("Let", klimaFontTitle) { navController.navigate("quiz/let") }
             Spacer(modifier = Modifier.height(24.dp))
-            QuizButton("Mellem", klimaFont) { navController.navigate("quiz/mellem") }
+            QuizButton("Mellem", klimaFontTitle) { navController.navigate("quiz/mellem") }
             Spacer(modifier = Modifier.height(24.dp))
-            QuizButton("Svær", klimaFont) { navController.navigate("quiz/svaer") }
+            QuizButton("Svær", klimaFontTitle) { navController.navigate("quiz/svaer") }
 
 
             Spacer(modifier = Modifier.weight(1f))

@@ -24,7 +24,7 @@ import com.example.klimaklog.ui.components.QuizQuestionUI
 @Composable
 fun LetQuizScreen(navController: NavController, viewModel: QuizViewModel = viewModel()) {
     val klimaFont = remember {
-        try { FontFamily(Font(R.font.roboto)) } catch (e: Exception) { FontFamily.Default }
+        try { FontFamily(Font(R.font.jolly_lodger)) } catch (e: Exception) { FontFamily.Default }
     }
 
     val question by viewModel.currentQuestion.collectAsState()
