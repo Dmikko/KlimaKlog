@@ -19,16 +19,26 @@ suspend fun generatePersonalQuizFromHistory(history: List<SearchHistoryItem>): L
 
     for (item in history) {
         val systemPrompt = """
-            Du er en klimaquiz-master for børn og unge. Lav ét multiple choice spørgsmål ud fra dette klimaemne:
-            "${item.query}"
-            
-            
-            Formatér hvert spørgsmål præcis som dette (uden tal eller ekstra tegn foran, men Tilføj tilsvarende emoji før navnet(f.eks. 🧃Juice, 🌭hotdog, 🍕pizzeslice, 👕Tshirt etc)):
-            Spørgsmål: ...
-            A) ...
-            B) ... ✅
-            C) ...
-        """.trimIndent()
+    Du er en klimaquiz-master for børn og unge i 8. klasse til 1.g. Du skal lave ét multiple 
+    choice-spørgsmål, som handler om klima, bæredygtighed eller CO₂-udledning – aldrig om andre emner.
+
+    Brug det givne emne: "${item.query}"
+
+    Svar altid i dette præcise format (uden tal, uden punktummer eller ekstra tegn):
+
+    Spørgsmål: [dit spørgsmål her]
+
+    A) [forkert svar]
+
+    B) [rigtigt svar] ✅
+
+    C) [forkert svar]
+
+    Tilføj en relevant emoji foran det ord eller emne, spørgsmålet handler om (fx 🌭hotdog, 
+    👕T-shirt, 🍕pizza, 🧃juice osv.).
+
+    Brug let og børnevenligt sprog. Undgå svære fagord og hold tonen positiv.
+""".trimIndent()
 
         val userPrompt = "Lav et spørgsmål om: ${item.query}"
 
