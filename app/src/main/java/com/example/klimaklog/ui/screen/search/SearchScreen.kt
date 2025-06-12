@@ -63,7 +63,7 @@ fun SearchScreen(navController: NavController) {
 
             Text(
                 text = "Hvad vil du gerne klima-vide noget mere om?",
-                style = TextStyle(fontFamily = klimaFont, fontSize = 18.sp)
+                style = TextStyle(fontFamily = klimaFont, fontSize = 24.sp)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
