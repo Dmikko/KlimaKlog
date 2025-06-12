@@ -21,6 +21,8 @@ import com.example.klimaklog.ui.components.ResultCard
 import com.example.klimaklog.data.remote.getClimateInfoFromQuery
 import com.example.klimaklog.data.local.HistoryManager
 import com.example.klimaklog.model.SearchHistoryItem
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -100,7 +102,8 @@ fun ResultScreen(navController: NavController, query: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

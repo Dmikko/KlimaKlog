@@ -19,20 +19,26 @@ fun ResultCard(title: String, content: String, font: FontFamily) {
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFC8FAD8)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = title, fontFamily = font, fontSize = 24.sp)
+            Text(
+                text = title,
+                fontFamily = font,
+                fontSize = 24.sp,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = content,
                 fontFamily = font,
                 fontSize = 20.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
     }

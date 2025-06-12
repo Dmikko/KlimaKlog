@@ -13,21 +13,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    surfaceVariant = Color(0xFF2C2C2C),      // Mørk baggrund til kort
-    onSurface = Color(0xFFF0F0F0),           // Lys tekst
-    error = Color(0xFFFF6B6B)                // Rød til fejl/Slet
+    primary = KlimaGreen,
+    onPrimary = KlimaDarkText,
+    primaryContainer = KlimaGreen,
+    onPrimaryContainer = KlimaDarkText,
+    surfaceVariant = Color(0xFF2C2C2C),
+    onSurface = DarkTextOnGreen,
+    error = Color(0xFFFF6B6B)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    surfaceVariant = Color(0xFFE0F7FA),      // Lys baggrund til kort
-    onSurface = Color(0xFF1C1B1F),           // Mørk tekst
-    error = Color(0xFFB00020)                // Standard Material Design rød
+    primary = KlimaGreen,
+    onPrimary = KlimaDarkText,
+    primaryContainer = KlimaGreen,
+    onPrimaryContainer = KlimaDarkText,
+    surfaceVariant = Color(0xFFE0F7FA),
+    onSurface = Color(0xFF1C1B1F),
+    error = Color(0xFFB00020)
 )
 
 
@@ -46,7 +48,7 @@ private val LightColorScheme = lightColorScheme(
 fun KlimaKlogTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

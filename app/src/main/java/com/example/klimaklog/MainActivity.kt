@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            KlimaKlogTheme { // Hvis du har en custom theme. Ellers brug MaterialTheme direkte.
+            KlimaKlogTheme { // Custom theme. Ellers brug MaterialTheme direkte.
                 Surface(color = MaterialTheme.colorScheme.background) {
                     KlimaNavGraph() // VIGTIGT: Starter vores navigation
                 }
