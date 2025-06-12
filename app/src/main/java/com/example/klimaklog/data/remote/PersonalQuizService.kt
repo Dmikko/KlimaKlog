@@ -25,12 +25,13 @@ suspend fun generatePersonalQuizFromHistory(history: List<SearchHistoryItem>): L
     Brug det givne emne: "${item.query}"
 
     Svar altid i dette præcise format (uden tal, uden punktummer eller ekstra tegn):
+    Det korrekte svar skal være tilfældigt om det er svarmulighed A), B) eller C)
 
     Spørgsmål: [dit spørgsmål her]
 
     A) [forkert svar]
 
-    B) [rigtigt svar] ✅
+    B) [rigtigt svar]
 
     C) [forkert svar]
 
