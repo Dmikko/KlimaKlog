@@ -72,7 +72,7 @@ fun QuizButton(text: String, font: FontFamily, onClick: () -> Unit) {
             .clickable(onClick = onClick),
         color = Color(0xFFB2FFB2),
         shape = RoundedCornerShape(30.dp),
-        shadowElevation = 6.dp
+        shadowElevation = 7.dp
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(

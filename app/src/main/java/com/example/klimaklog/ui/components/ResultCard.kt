@@ -26,12 +26,12 @@ fun ResultCard(title: String, content: String, font: FontFamily) {
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = title, fontFamily = font, fontSize = 24.sp)
+            Text(text = title, fontFamily = font, fontSize = 30.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = content,
                 fontFamily = font,
-                fontSize = 20.sp,
+                fontSize = 24.sp,
                 textAlign = TextAlign.Center
             )
         }
