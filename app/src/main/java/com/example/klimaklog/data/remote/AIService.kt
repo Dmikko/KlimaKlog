@@ -10,6 +10,7 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
+//Mathias
 
 suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatchers.IO) {
     val client = OkHttpClient()

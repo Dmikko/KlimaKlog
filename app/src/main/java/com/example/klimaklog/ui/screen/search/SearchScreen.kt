@@ -18,6 +18,8 @@ import androidx.navigation.NavController
 import com.example.klimaklog.R
 import com.example.klimaklog.ui.theme.klimaFontTitle
 
+//Esben og Johan
+
 @Composable
 fun SearchScreen(navController: NavController) {
     val klimaFont = try {

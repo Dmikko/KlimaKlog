@@ -12,6 +12,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+//Johan
+
 @Composable
 fun ResultCard(title: String, content: String, font: FontFamily) {
     Card(

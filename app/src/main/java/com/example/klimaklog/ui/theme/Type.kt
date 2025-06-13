@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.klimaklog.R
 
+//Johan (Mike)
 
 // ui/theme/Type.kt
 val klimaFontTitle = FontFamily(Font(R.font.jolly_lodger))

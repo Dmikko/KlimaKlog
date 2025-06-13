@@ -16,6 +16,8 @@ import com.example.klimaklog.ui.screen.quiz.PersonalChallengesScreen
 import com.example.klimaklog.ui.screen.quiz.QuizOverviewScreen
 import com.example.klimaklog.ui.screen.quiz.SvaerQuizScreen
 
+//Esben
+
 @Composable
 fun KlimaNavGraph() {
     val navController = rememberNavController()
