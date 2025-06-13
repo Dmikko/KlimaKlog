@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+
+//Mike
+
 val Context.historyStore by preferencesDataStore("klima_history")
 
 class HistoryManager(private val context: Context) {

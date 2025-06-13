@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.klimaklog.model.QuizQuestion
 
+//Esben Mike
 
 @Composable
 fun QuizQuestionUI(

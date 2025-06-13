@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+//Esben
+
 @Composable
 fun QuizResultScreen(navController: NavController, wasCorrect: Boolean, font: FontFamily) {
     Column(

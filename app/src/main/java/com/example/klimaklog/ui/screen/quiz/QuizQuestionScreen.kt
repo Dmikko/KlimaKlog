@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 
+// Johan (Esben)
 
 data class QuizQuestion(
     val question: String,
