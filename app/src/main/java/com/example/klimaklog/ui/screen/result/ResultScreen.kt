@@ -68,7 +68,7 @@ fun ResultScreen(navController: NavController, query: String) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Klima Klog", fontFamily = klimaFont, fontSize = 28.sp) },
+                title = { Text("Klima Klog", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -81,19 +81,19 @@ fun ResultScreen(navController: NavController, query: String) {
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("search") },
-                    label = { Text("Søgning", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Søgning", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("quiz") },
-                    label = { Text("Quiz", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Quiz", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { navController.navigate("history") },
-                    label = { Text("Historik", fontFamily = klimaFont, fontSize = 24.sp) },
+                    label = { Text("Historik", fontFamily = klimaFontTitle, fontSize = 28.sp) },
                     icon = {}
                 )
             }
