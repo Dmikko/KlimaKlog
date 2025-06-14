@@ -47,9 +47,11 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
             try {
                 val history = HistoryManager(context).loadHistory()
                 if (history.isEmpty()) {
-                    errorMessage = "Du har endnu ikke stillet spørgsmål. Gå til search og stil spørgsmål om klima og din hverdag."
+                    errorMessage = "Du har endnu ikke stillet spørgsmål."
                 } else {
                     val generatedQuestions = generatePersonalQuizFromHistory(history)
+                    println("Antal spørgsmål genereret: ${generatedQuestions.size}")
+
                     if (generatedQuestions.isEmpty()) {
                         errorMessage = "AI kunne ikke generere din personlige quiz."
                     } else {
@@ -103,7 +105,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                     }
                 }
 
-                isQuizFinished -> { // 👈 NY: Slutskærm
+                isQuizFinished -> {
                     Column(
                         Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -133,7 +135,7 @@ fun PersonalChallengesScreen(navController: NavController, viewModel: QuizViewMo
                         onAnswerSelected = { viewModel.submitAnswer(it) },
                         onNext = {
                             val hasNext = viewModel.nextQuestion()
-                            if (!hasNext) isQuizFinished = true // 👈 NY: Slut
+                            if (!hasNext) isQuizFinished = true
                         },
                         font = klimaFontTitle
                     )

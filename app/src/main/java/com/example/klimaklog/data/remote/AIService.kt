@@ -12,9 +12,15 @@ import org.json.JSONObject
 
 //Mathias
 
-suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatchers.IO) {
-    val client = OkHttpClient()
+// AIService sender brugerens spørgsmål til OpenAI API
+// og returnerer et letforståeligt klima-svar med CO2-aftryk,
+// hvad påvirker det, sådan kan du reducere det og fun fact
 
+
+suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatchers.IO) {
+    val client = OkHttpClient() // Én klient til HTTP-kaldet
+
+    // systemPromt definere rolle, tonen og svarets præcise format
     val systemPrompt = """
     Du er en hjælpsom og pædagogisk klimaassistent for børn og unge i 8. klasse til 1.g. Dit job er 
     at forklare klimaaftryk og bæredygtighed på en positiv og forståelig måde, når de spørger om et 
@@ -38,8 +44,10 @@ suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatc
     Svar altid kort og i børnevenligt sprog. Undgå svære ord og forklar ting enkelt.
 """.trimIndent()
 
+    // bruger prompt
     val userPrompt = "Hvor meget CO₂ udleder: $query?"
 
+    // JSON body til OpenAI
     val json = """
         {
           "model": "gpt-4o",
@@ -53,12 +61,14 @@ suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatc
 
     val body = json.toRequestBody("application/json".toMediaType())
 
+    // HTTP-request
     val request = Request.Builder()
         .url("https://api.openai.com/v1/chat/completions")
         .post(body)
         .addHeader("Authorization", "Bearer ${BuildConfig.OPENAI_API_KEY}")
         .build()
 
+    // udfør og log svaret
     val response = client.newCall(request).execute()
     val responseBody = response.body?.string()
     Log.d("AIService", "HTTP status: ${response.code}")
@@ -68,6 +78,7 @@ suspend fun getClimateInfoFromQuery(query: String): String = withContext(Dispatc
         throw Exception("Fejl ved OpenAI API")
     }
 
+    // trækker tekst-svaret ud af JSON
     return@withContext try {
         JSONObject(responseBody)
             .getJSONArray("choices")

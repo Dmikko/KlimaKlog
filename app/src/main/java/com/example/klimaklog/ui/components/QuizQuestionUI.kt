@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import com.example.klimaklog.model.QuizQuestion
 
 //Esben Mike
-
+// lavet med hjælp fra ChatGPT
 @Composable
 fun QuizQuestionUI(
     question: QuizQuestion,
@@ -37,12 +37,23 @@ fun QuizQuestionUI(
         )
 
         question.options.forEach { option ->
+            val isSelected = userAnswer == option
+            val isCorrect = question.correctAnswer == option
+
+            val backgroundColor = when {
+                userAnswer == null -> Color(0xFFBFFFB8) // Standard grønlig farve
+                isSelected && isCorrect -> Color(0xFF81C784) // ✅ Rigtig og valgt – grøn
+                isSelected && !isCorrect -> Color(0xFFFFCDD2) // ❌ Forkert og valgt – rød
+                !isSelected && isCorrect -> Color(0xFFA5D6A7) // 🔍 Ikke valgt men korrekt – lys grøn
+                else -> Color(0xFFE0E0E0) // Grå for andre
+            }
+
             Button(
-                onClick = { onAnswerSelected(option) },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBFFFB8)),
+                onClick = { if (userAnswer == null) onAnswerSelected(option) },
+                colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
-                    .padding(vertical = 12.dp)
+                    .padding(vertical = 8.dp)
                     .fillMaxWidth()
                     .height(70.dp)
             ) {
@@ -54,7 +65,7 @@ fun QuizQuestionUI(
             Spacer(modifier = Modifier.height(24.dp))
             val correct = userAnswer == question.correctAnswer
             Text(
-                text = if (correct) "Korrekt! +10 point" else "Forkert 😢",
+                text = if (correct) "Korrekt! +10 point" else "Forkert 😢\nRigtigt svar: ${question.correctAnswer}",
                 color = if (correct) Color(0xFF4CAF50) else Color.Red,
                 fontFamily = font,
                 fontSize = 20.sp
@@ -72,7 +83,6 @@ fun QuizQuestionUI(
 
         if (userAnswer != null) {
             Spacer(modifier = Modifier.height(24.dp))
-
             Button(
                 onClick = onNext,
                 modifier = Modifier
@@ -84,8 +94,5 @@ fun QuizQuestionUI(
                 Text("Næste", fontFamily = font, fontSize = 18.sp, color = Color.White)
             }
         }
-
-
-
     }
 }

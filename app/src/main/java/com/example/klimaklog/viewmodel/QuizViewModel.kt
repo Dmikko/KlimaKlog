@@ -109,29 +109,36 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     fun submitAnswer(answer: String) {
         // Undgå dobbeltklik
         if (_userAnswer.value != null) return
-
         _userAnswer.value = answer
 
         if (checkAnswerIsCorrect()) {
             viewModelScope.launch {
                 _totalPoints.value += 10
                 _points.value += 10
+
+                // Tæl personlige point hvis det er en personlig challenge
                 if (_currentQuestion.value?.level == "personal") {
                     _personalPoints.value += 10
-                    context.dataStore.edit { it[PERSONAL_POINTS_KEY] = _personalPoints.value }
                 }
-                saveTotalPoints(_totalPoints.value)
+
+                // Én samlet skriv – ingen midlertidig mismatch
+                context.dataStore.edit { prefs ->
+                    prefs[TOTAL_POINTS_KEY]    = _totalPoints.value
+                    prefs[PERSONAL_POINTS_KEY] = _personalPoints.value
+                }
             }
         }
     }
 
 
+
+    /*
     fun incrementPointsIfCorrect() { // ??????????????
         if (_userAnswer.value == _currentQuestion.value?.correctAnswer) {
             _points.value += 10
         }
     }
-
+*/
     fun checkAnswerIsCorrect(): Boolean {
         return _userAnswer.value == _currentQuestion.value?.correctAnswer
     }
@@ -143,7 +150,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
             _userAnswer.value = null
             true
         } else {
-            // NYT: quiz er færdig, ryd spørgsmålet
+            // quiz er færdig, ryd spørgsmålet
             _currentQuestion.value = null
             false
         }

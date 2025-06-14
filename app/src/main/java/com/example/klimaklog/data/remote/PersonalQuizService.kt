@@ -13,36 +13,50 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
+// PersonalQuizService tager listen af søgehistorik-items fra brugeren
+// og giver den tilbage til AI, som så laver en personlig multiple-choice klima-quiz
+// udfra hver spørgsmål, der er i søgehistorik
+
+
 suspend fun generatePersonalQuizFromHistory(history: List<SearchHistoryItem>): List<QuizQuestion> = withContext(Dispatchers.IO) {
     val client = OkHttpClient()
     val resultList = mutableListOf<QuizQuestion>()
 
+    // loop gennem hvert historik-item
     for (item in history) {
+        // definerer rolle, tone og format
         val systemPrompt = """
-    Du er en klimaquiz-master for børn og unge i 8. klasse til 1.g. Du skal lave ét multiple 
-    choice-spørgsmål, som handler om klima, bæredygtighed eller CO₂-udledning – aldrig om andre emner.
+Du er en klimaquiz-master for børn og unge i 8. klasse til 1.g. Du skal lave ét multiple 
+choice-spørgsmål, som handler om klima, bæredygtighed eller CO₂-udledning – aldrig om andre emner.
 
-    Brug det givne emne: "${item.query}"
+Brug det givne emne: "${item.query}"
 
-    Svar altid i dette præcise format (uden tal, uden punktummer eller ekstra tegn):
-    Det korrekte svar skal være tilfældigt om det er svarmulighed A), B) eller C)
+Svar altid i præcis dette format – uden ekstra tegn, uden punktummer, og med én korrekt svarmulighed:
 
-    Spørgsmål: [dit spørgsmål her]
+Spørgsmål: [dit spørgsmål her]
 
-    A) [forkert svar]
+A) ...
+B) ...
+C) ...
 
-    B) [rigtigt svar]
+Markér det **korrekte svar** med symbolet ✅ – og placer det tilfældigt som A), B) eller C)
 
-    C) [forkert svar]
+Eksempel:
+A) Forkert svar  
+B) Korrekt svar ✅  
+C) Forkert svar
 
-    Tilføj en relevant emoji foran det ord eller emne, spørgsmålet handler om (fx 🌭hotdog, 
-    👕T-shirt, 🍕pizza, 🧃juice osv.).
+Tilføj en emoji der passer til emnet, f.eks. 🌭hotdog, 👕T-shirt, 🍕pizza – men kun én emoji, og placer den først i spørgsmålet.
 
-    Brug let og børnevenligt sprog. Undgå svære fagord og hold tonen positiv.
+Skriv i børnevenligt og let sprog, og undgå svære fagudtryk.
 """.trimIndent()
 
+
+
+        // userPrompt sætter selve emnet for hvert spørgsmål
         val userPrompt = "Lav et spørgsmål om: ${item.query}"
 
+        // HTTP-request til OpenAI
         val json = """
             {
               "model": "gpt-4o",
@@ -76,6 +90,7 @@ suspend fun generatePersonalQuizFromHistory(history: List<SearchHistoryItem>): L
         val parsedOptions = options.map { it.drop(2).replace("✅", "").trim() }
         val correct = options.find { it.contains("✅") }?.drop(2)?.replace("✅", "")?.trim() ?: parsedOptions.firstOrNull() ?: continue
 
+        // Præcis 3 svarmuligheder med ét korrekt svar
         if (parsedOptions.size == 3 && correct in parsedOptions) {
             resultList.add(
                 QuizQuestion(
@@ -88,5 +103,6 @@ suspend fun generatePersonalQuizFromHistory(history: List<SearchHistoryItem>): L
         }
     }
 
+    // Færdigliste returneres til UI-laget.
     return@withContext resultList
 }
