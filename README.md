@@ -28,8 +28,8 @@
 - **UI Framework:** Jetpack Compose  
 - **Arkitektur:** MVVM  
 - **State-håndtering:** MutableStateFlow  
-- **Navigation:** Enum-baseret custom navigation  
-- **AI-integration:** OpenAI API (`gpt-3.5-turbo`) via Retrofit  
+- **Navigation:** custom navigation  
+- **AI-integration:** OpenAI API (`4o`) via okhttp
 - **Persistent storage:** SharedPreferences  
 - **Build & Test Tools:** GitHub Actions, ktlint, detekt, unit tests
 
